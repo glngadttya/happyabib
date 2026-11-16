@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Abib</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            font-family: 'Quicksand', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+        .font-script {
+            font-family: 'Dancing Script', cursive;
+        }
+        .sky-gradient {
+            background: linear-gradient(135deg, #0c1445 0%, #1a237e 30%, #0d47a1 60%, #01579b 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), 0 0 60px rgba(56, 189, 248, 0.3); }
+        }
+        .hero-anim-1 {
+            animation: heroFadeUp 1s ease-out 0.2s both;
+        }
+        .hero-anim-2 {
+            animation: heroFadeUp 1s ease-out 0.7s both;
+        }
+        .hero-anim-3 {
+            animation: heroFadeUp 1s ease-out 1.2s both;
+        }
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease-out;
+        }
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease-out;
+        }
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .heart-beat {
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.15); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        .confetti-piece {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            top: -20px;
+            z-index: 100;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        .star-twinkle {
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5), 0 0 30px rgba(56, 189, 248, 0.2);
+        }
+        .cake-glow {
+            filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.6));
+            color: #fbbf24;
+        }
+        .btn-sky {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            transition: all 0.3s ease;
+        }
+        .btn-sky:active {
+            transform: scale(0.97);
+        }
+        .icon-bounce {
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        section {
+            width: 100%;
+            overflow: hidden;
+        }
+        @media (max-width: 640px) {
+            .glass-card {
+                padding: 1.5rem;
+            }
+            .hero-cake-icon {
+                font-size: 5rem !important;
+            }
+            .emoji-deco-mobile-hide {
+                display: none;
+            }
+        }
+        @media (min-width: 641px) {
+            .hero-cake-icon {
+                font-size: 8rem;
+            }
+        }
+    </style>
+</head>
+<body class="sky-gradient min-h-screen overflow-x-hidden">
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div id="confettiContainer"></div>
+
+    <section class="relative min-h-screen flex flex-col items-center justify-center px-4 py-12 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="star-twinkle absolute text-sky-300 text-sm" style="top: 8%; left: 15%; animation-delay: 0s;">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+            <div class="star-twinkle absolute text-sky-200 text-xs" style="top: 15%; right: 12%; animation-delay: 0.5s;">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+            <div class="star-twinkle absolute text-sky-400 text-sm" style="bottom: 20%; left: 10%; animation-delay: 1s;">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+            <div class="star-twinkle absolute text-sky-200 text-xs" style="bottom: 30%; right: 8%; animation-delay: 1.5s;">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+            <div class="star-twinkle absolute text-sky-100 text-xs" style="top: 45%; left: 5%; animation-delay: 2s;">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+            <div class="star-twinkle absolute text-sky-300 text-sm" style="top: 60%; right: 6%; animation-delay: 2.5s;">
+                <i class="fas fa-star-of-life"></i>
+            </div>
+        </div>
+
+        <div class="float-anim mb-6 relative z-10">
+            <i class="fas fa-birthday-cake cake-glow bounce-slow hero-cake-icon"></i>
+        </div>
+
+        <h1 class="font-script text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white text-center mb-3 px-2 hero-anim-1 relative z-10" style="text-shadow: 0 0 20px rgba(56,189,248,0.6), 0 0 40px rgba(56,189,248,0.3);">
+            Happy Birthday
+        </h1>
+
+        <h2 class="font-script text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-sky-300 text-center text-glow mb-6 px-2 hero-anim-2 relative z-10">
+            Abib
+        </h2>
+
+        <p class="text-sky-200/80 text-center text-sm sm:text-base md:text-xl max-w-md px-4 hero-anim-3 relative z-10">
+            Ada sesuatu yang mau aku kasih ke kamu...
+        </p>
+
+        <div class="mt-8 sm:mt-12 hero-anim-3 relative z-10">
+            <button onclick="scrollToSection('section2')" class="btn-sky text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold pulse-glow flex items-center gap-2 sm:gap-3">
+                <span>Buka dulu ya</span>
+                <i class="fas fa-envelope icon-bounce"></i>
+            </button>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-sky-300 text-lg"></i>
+        </div>
+    </section>
+
+    <section id="section2" class="relative min-h-screen flex items-center justify-center px-3 sm:px-4 py-12 sm:py-20">
+        <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-2xl w-full mx-auto relative overflow-hidden scale-in">
+            <div class="absolute -top-6 -right-6 opacity-15 wiggle emoji-deco-mobile-hide">
+                <i class="fas fa-wand-magic-sparkles" style="font-size: 3rem; color: #7dd3fc;"></i>
+            </div>
+            <div class="absolute -bottom-6 -left-6 opacity-15 float-anim emoji-deco-mobile-hide">
+                <i class="fas fa-moon" style="font-size: 2.5rem; color: #7dd3fc;"></i>
+            </div>
+
+            <div class="text-center mb-4 sm:mb-6">
+                <i class="fas fa-heart text-sky-400 heart-beat text-4xl sm:text-5xl"></i>
+            </div>
+
+            <h3 class="font-script text-2xl sm:text-3xl md:text-4xl text-sky-300 text-center mb-5 sm:mb-8">Untuk kamu, Abib...</h3>
+
+            <div class="space-y-4 sm:space-y-6 text-sky-100/90 text-sm sm:text-base md:text-lg leading-relaxed">
+                <p class="fade-in">
+                    Hei. Aku nggak tahu harus mulai dari mana, tapi aku mau kamu tahu satu hal:
+                    <span class="text-sky-300 font-semibold">hari ini spesial.</span>
+                    Bukan cuma karena tanggalnya, tapi karena ada kamu yang lahir ke dunia ini.
+                </p>
+                <p class="fade-in">
+                    Aku inget waktu kamu bilang kamu suka langit biru. Warna yang tenang, tapi luasnya nggak ada batas.
+                    Dan buat aku, kamu tuh persis kayak langit itu — <span class="text-sky-300 font-semibold">sederhana, tapi bikin orang nyaman ngeliatnya.</span>
+                </p>
+            </div>
+
+            <div class="mt-6 sm:mt-10 flex justify-center gap-4 sm:gap-6">
+                <i class="fas fa-birthday-cake text-sky-300 text-xl sm:text-2xl wiggle"></i>
+                <i class="fas fa-gift text-sky-300 text-xl sm:text-2xl wiggle" style="animation-delay: 0.3s;"></i>
+                <i class="fas fa-champagne-glasses text-sky-300 text-xl sm:text-2xl wiggle" style="animation-delay: 0.6s;"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative min-h-screen flex items-center justify-center px-3 sm:px-4 py-12 sm:py-20">
+        <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-2xl w-full mx-auto relative overflow-hidden slide-left">
+            <div class="absolute -top-4 -left-4 opacity-15 float-anim emoji-deco-mobile-hide">
+                <i class="fas fa-cloud" style="font-size: 2.5rem; color: #7dd3fc;"></i>
+            </div>
+
+            <h3 class="font-script text-2xl sm:text-3xl md:text-4xl text-sky-300 text-center mb-5 sm:mb-8">Apa yang aku suka dari kamu</h3>
+
+            <div class="space-y-3 sm:space-y-5">
+                <div class="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 group">
+                    <i class="fas fa-water text-sky-400 text-xl sm:text-3xl mt-1"></i>
+                    <div>
+                        <p class="text-sky-200 font-semibold mb-1 text-sm sm:text-base">Cara kamu ketawa</p>
+                        <p class="text-sky-100/70 text-xs sm:text-sm">Nggak pernah gagal bikin aku ikut senyum, bahkan di hari yang paling berat.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 group">
+                    <i class="fas fa-heart text-sky-400 text-xl sm:text-3xl mt-1"></i>
+                    <div>
+                        <p class="text-sky-200 font-semibold mb-1 text-sm sm:text-base">Hati kamu</p>
+                        <p class="text-sky-100/70 text-xs sm:text-sm">Kamu mungkin nggak sadar, tapi caramu peduli ke orang lain itu tulus banget.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 group">
+                    <i class="fas fa-star text-sky-400 text-xl sm:text-3xl mt-1"></i>
+                    <div>
+                        <p class="text-sky-200 font-semibold mb-1 text-sm sm:text-base">Mimpi-mimpi kamu</p>
+                        <p class="text-sky-100/70 text-xs sm:text-sm">Aku suka liat kamu semangat ngomongin hal yang kamu pengen. Mata kamu berbinar.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 hover:bg-white/10 transition-all duration-300 group">
+                    <i class="fas fa-moon text-sky-400 text-xl sm:text-3xl mt-1"></i>
+                    <div>
+                        <p class="text-sky-200 font-semibold mb-1 text-sm sm:text-base">Kamu, apa adanya</p>
+                        <p class="text-sky-100/70 text-xs sm:text-sm">Nggak perlu jadi siapa-siapa. Kamu udah cukup. Lebih dari cukup.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative min-h-screen flex items-center justify-center px-3 sm:px-4 py-12 sm:py-20">
+        <div class="max-w-2xl w-full mx-auto relative slide-right">
+
+            <div class="text-center mb-6 sm:mb-10">
+                <i class="fas fa-meteor text-sky-300 float-anim text-4xl sm:text-6xl"></i>
+            </div>
+
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 relative overflow-hidden">
+                <div class="absolute top-3 right-3 opacity-10 wiggle emoji-deco-mobile-hide">
+                    <i class="fas fa-birthday-cake" style="font-size: 2.5rem; color: #7dd3fc;"></i>
+                </div>
+
+                <h3 class="font-script text-2xl sm:text-3xl md:text-4xl text-sky-300 text-center mb-5 sm:mb-8">Doa & Harapan</h3>
+
+                <div class="space-y-4 sm:space-y-6 text-sky-100/90 text-sm sm:text-base md:text-lg leading-relaxed">
+                    <p>
+                        Aku nggak tau kamu bakal baca ini sambil ngapain. Tapi kalau kamu baca ini pas hari ulang tahunmu,
+                        aku pengen kamu tahu kalau <span class="text-sky-300 font-semibold">aku tetap berharap yang terbaik buat kamu.</span>
+                    </p>
+                    <p>
+                        Semoga semua yang kamu usahain dibalas berkali-kali lipat. Semoga kamu ketemu orang-orang yang
+                        beneran tulus sama kamu. Semoga hatimu selalu dijaga, nggak cuma sama orang lain, tapi juga sama kamu sendiri.
+                    </p>
+                    <p>
+                        Dan kalau suatu hari kamu ngerasa capek, inget aja: langit biru itu selalu ada di atas awan.
+                        <span class="text-sky-300 font-semibold">Selalu ada alasan buat lihat ke atas lagi.</span>
+                    </p>
+                </div>
+
+                <div class="mt-6 sm:mt-10 flex justify-center gap-3 sm:gap-4">
+                    <i class="fas fa-star-of-life text-sky-400 text-lg sm:text-2xl star-twinkle"></i>
+                    <i class="fas fa-star-of-life text-sky-400 text-lg sm:text-2xl star-twinkle" style="animation-delay: 0.5s;"></i>
+                    <i class="fas fa-star-of-life text-sky-400 text-lg sm:text-2xl star-twinkle" style="animation-delay: 1s;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative min-h-screen flex items-center justify-center px-3 sm:px-4 py-12 sm:py-20">
+        <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-xl w-full mx-auto relative overflow-hidden text-center scale-in">
+            <div class="absolute -top-6 -right-6 opacity-10 float-anim emoji-deco-mobile-hide">
+                <i class="fas fa-envelope-open-text" style="font-size: 3rem; color: #7dd3fc;"></i>
+            </div>
+
+            <div class="mb-4 sm:mb-6">
+                <i class="fas fa-heart text-sky-400 heart-beat text-4xl sm:text-5xl"></i>
+            </div>
+
+            <h3 class="font-script text-2xl sm:text-3xl md:text-4xl text-sky-300 mb-4 sm:mb-6">Satu pesan terakhir</h3>
+
+            <p class="text-sky-100/90 text-sm sm:text-base md:text-lg leading-relaxed mb-5 sm:mb-8">
+                Selamat ulang tahun, Abib.<br>
+                <span class="text-sky-300 font-semibold">Semoga tahun ini jadi tahun terbaikmu.</span>
+            </p>
+
+            <p class="font-script text-xl sm:text-2xl md:text-3xl text-sky-200 mb-5 sm:mb-8 px-2" style="text-shadow: 0 0 15px rgba(56,189,248,0.5);">
+                You deserve the world, and maybe a little more.
+            </p>
+
+            <div class="flex justify-center gap-4 sm:gap-6">
+                <i class="fas fa-birthday-cake text-sky-300 text-xl sm:text-3xl bounce-slow" style="animation-delay: 0s;"></i>
+                <i class="fas fa-gift text-sky-300 text-xl sm:text-3xl bounce-slow" style="animation-delay: 0.2s;"></i>
+                <i class="fas fa-champagne-glasses text-sky-300 text-xl sm:text-3xl bounce-slow" style="animation-delay: 0.4s;"></i>
+                <i class="fas fa-heart text-sky-300 text-xl sm:text-3xl bounce-slow" style="animation-delay: 0.6s;"></i>
+                <i class="fas fa-star text-sky-300 text-xl sm:text-3xl bounce-slow" style="animation-delay: 0.8s;"></i>
+            </div>
+        </div>
+    </section>
+
+    <footer class="relative py-10 sm:py-14 text-center px-4">
+        <div class="flex justify-center gap-4 mb-4">
+            <i class="fas fa-heart text-sky-400/60 text-sm heart-beat"></i>
+            <i class="fas fa-star-of-life text-sky-400/40 text-xs star-twinkle"></i>
+            <i class="fas fa-heart text-sky-400/60 text-sm heart-beat" style="animation-delay: 0.5s;"></i>
+        </div>
+        <p class="font-script text-lg sm:text-xl text-sky-300/70 mb-2">
+            Dibuat dengan sepenuh hati
+        </p>
+        <p class="text-sky-200/40 text-xs sm:text-sm tracking-wider">
+            oleh <span class="text-sky-300/70 font-semibold">ceyy</span> untuk <span class="text-sky-300/70 font-semibold">Abib</span>
+        </p>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .scale-in, .slide-left, .slide-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }, { passive: true });
+
+        const isMobile = window.innerWidth < 640;
+
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#38bdf8', '#0ea5e9', '#7dd3fc', '#bae6fd', '#fbbf24', '#f472b6', '#a78bfa', '#34d399'];
+            const count = isMobile ? 30 : 60;
+
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random() * 100 + 'vw';
+                    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.width = Math.random() * 6 + 4 + 'px';
+                    piece.style.height = Math.random() * 6 + 4 + 'px';
+                    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    piece.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    piece.style.animationDelay = Math.random() * 0.5 + 's';
+                    container.appendChild(piece);
+
+                    setTimeout(() => {
+                        piece.remove();
+                    }, 6000);
+                }, i * 80);
+            }
+        }
+
+        setTimeout(createConfetti, 500);
+
+        if (!isMobile) {
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    createConfetti();
+                }
+            }, 8000);
+        }
+
+        const sparkleIcons = ['fa-star-of-life', 'fa-star', 'fa-wand-magic-sparkles', 'fa-certificate'];
+        function createSparkle() {
+            const icon = document.createElement('i');
+            icon.className = `fas ${sparkleIcons[Math.floor(Math.random() * sparkleIcons.length)]} fixed pointer-events-none z-0`;
+            icon.style.left = Math.random() * 100 + 'vw';
+            icon.style.top = Math.random() * 100 + 'vh';
+            icon.style.color = ['#38bdf8', '#7dd3fc', '#bae6fd', '#fbbf24'][Math.floor(Math.random() * 4)];
+            icon.style.fontSize = Math.random() * 10 + 8 + 'px';
+            icon.style.transition = 'all 2s ease-out';
+            icon.style.opacity = '0.8';
+            document.body.appendChild(icon);
+
+            setTimeout(() => {
+                icon.style.opacity = '0';
+                icon.style.transform = 'translateY(-30px) scale(0)';
+            }, 100);
+
+            setTimeout(() => {
+                icon.remove();
+            }, 2500);
+        }
+
+        if (!isMobile) {
+            setInterval(createSparkle, 1200);
+        }
+    </script>
+</body>
+</html>
